@@ -1,0 +1,120 @@
+.sidebar-panels
+  width 100%
+  height 100%
+
+.sidebar-mask, .sidebar-switches, .site-overview
+  display none
+
+.toc-container
+    height 100%
+
++mobile-device()
+  .sidebar
+    z-index $sidebar-z-index
+
+    &[show]
+      .sidebar-mask
+        display block
+
+      .sidebar-panels
+        transform translateX(0)
+
+
+  .sidebar-mask
+    position fixed
+    top 0
+    bottom 0
+    left 0
+    right 0
+    background rgba(0, 0, 0, 0.4)
+    // backdrop-filter blur(10px)
+
+
+  .sidebar-panels
+    position fixed
+    top 0
+    bottom 0
+    right 0
+    width 260px
+    padding 1rem
+    transform translateX(100%) // hide
+    transition transform 0.2s ease-in-out
+    backdrop-filter blur(10px)
+    background rgba(convert($css-light-vars.--color-canvas-default), 0.6)
+
+    +dark-mode()
+      background rgba(convert($css-dark-vars.--color-canvas-default), 0.6)
+
+
+  .sidebar-switches
+    display flex
+    flex-direction row
+    justify-content space-around
+    align-items center
+
+    div
+      display flex
+      justify-content center
+      align-items center
+      width 3rem
+      height 3rem
+      cursor pointer
+
+      i
+        font-size 2rem
+        color var(--color-fg-default)
+
+      .sidebar-panels[panel=toc] &:nth-child(1) i
+        color var(--color-accent-emphasis)
+
+      .sidebar-panels[panel=overview] &:nth-child(2) i
+        color var(--color-accent-emphasis)
+
+
+  .toc-container
+    height auto
+
+
+  .toc
+    display none
+
+    .sidebar-panels[panel=toc] &
+      animation fade-in-up-10px 0.2s linear
+      display block
+
+
+  .toc-header i
+    display none
+
+
+  .site-overview
+    display none
+    height calc(100% - 3rem)
+    overflow-x hidden
+    overflow-y auto
+
+    .sidebar-panels[panel=overview] &
+      animation fade-in-up-10px 0.2s linear
+      display block
+
+    .map-section
+      margin 1rem 0
+      line-height 2
+
+      &>a
+        display block
+        width 100%
+
+        &, i
+          font-size 1.1rem
+
+      a
+        color var(--text-1-color)
+
+        &:hover
+          color var(--link-hover-color)
+
+    .map-section-items
+      display grid
+      grid-template-columns 1fr 1fr
+      padding-left 1rem

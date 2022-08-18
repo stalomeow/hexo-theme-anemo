@@ -1,0 +1,34 @@
+<%
+var valid_licenses = ["BY", "BY-SA", "BY-ND", "BY-NC", "BY-NC-SA", "BY-NC-ND"]
+%>
+
+<% if (theme.post.copyright.enable && page.copyright !== false) { %>
+  <% var licenses = ((typeof page.copyright === 'string') ? page.copyright : theme.post.copyright.content) %>
+
+  <div class="open-message" style="text-align:center;">
+    <% if (valid_licenses.includes(licenses.toUpperCase())) { %>
+      <% licenses = licenses.toLowerCase() %>
+
+      <%# 文字 %>
+      <%= __('copyright.licenses') %>
+      <a class="license-link" target="_blank"
+        href="https://creativecommons.org/licenses/<%- licenses %>/4.0/"
+        rel="external nofollow noreferrer">
+        CC <%- licenses.toUpperCase() %> 4.0
+      </a>
+
+      <br>
+
+      <%# 图标 %>
+      <% ['cc', ...licenses.split('-')].forEach(e => { %>
+        <a class="license-icon">
+          <span class="hint--top hint--rounded" aria-label="<%= __('copyright.' + e) %>">
+            <i class="<%- theme.iconfont.class_map[e] %>"></i>
+          </span>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <%- licenses %>
+    <% } %>
+  </div>
+<% } %>

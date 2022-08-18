@@ -1,0 +1,25 @@
+.scroll-down-tip // 向下滚动提示
+  position absolute
+  bottom 1rem
+  display flex
+  flex-direction column
+  align-items center
+  cursor pointer
+
+  i // 鼠标图标
+    font-size 1.5rem
+    color #fff
+
+  .line // 不断向下滑的线
+    overflow hidden
+    margin-top 0.2rem
+    width 1px
+    height 3rem
+
+    &::after
+      content ""
+      display block
+      height 100%
+      background #fff
+      -webkit-animation move-down 2s 0s infinite
+      animation move-down 2s 0s infinite

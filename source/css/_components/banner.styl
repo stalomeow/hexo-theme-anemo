@@ -1,0 +1,132 @@
+.banner // banner 本体
+  position relative
+  overflow hidden
+  cursor default
+  -webkit-animation fade-in 1.5s
+  animation fade-in 1.5s
+
+  &[parallax="true"]
+    will-change transform
+    -webkit-transform-style preserve-3d
+    -webkit-backface-visibility hidden
+
+  &>div:nth-child(1) // 匹配背景图（不包括视频）
+    display block
+    position absolute
+    top 0
+    left 0
+    width 100%
+    height 100%
+
+.banner-mask // banner 上的蒙版
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+  position absolute
+  width 100%
+  height 100%
+  // background-color rgba(0, 0, 0, 0.3)
+
+  .page-title // 标题
+    width 80%
+    max-width calc(960px - 6rem)
+    color #fff
+    text-align center
+    text-shadow 0 0.2rem 0.3rem rgba(0, 0, 0, 0.5)
+    font-size 2rem
+
+    @media (max-width: 767px)
+      font-size 1.5rem // 变小
+
+    @media (max-width: 575px)
+      font-size 1.35rem // 变更小
+
+// 适配不同分辨率
+if $banner-width-height-ratio > 0
+  @media (max-width: unit($banner-width-height-ratio * 100, "vh"))
+    .banner
+      max-height unit(100 / $banner-width-height-ratio, "vw")
+
+  @media (max-width: unit($scroll-down-tip-height-limit - 0.01, "vh"))
+    .banner-mask .scroll-down-tip // 隐藏下滑提示
+      display none
+
+// ---------------------------------------
+// 多图 banner
+// ---------------------------------------
+
+.banner-images div // 每一张图片
+  position absolute
+  top 0
+  left 0
+  width 100%
+  height 100%
+  // background-size cover
+  // background-position center center
+  // background-repeat no-repeat
+  opacity 0
+  -webkit-animation banner-image-anim ($banner-dyanmic-loop-img-count * $banner-dyanmic-loop-each-seconds)s linear infinite 0s
+  animation banner-image-anim ($banner-dyanmic-loop-img-count * $banner-dyanmic-loop-each-seconds)s linear infinite 0s
+  -webkit-backface-visibility hidden
+  backface-visibility hidden
+  transform-style preserve-3d
+
+// 从第二个开始设置动画延迟
+for i in (2..$banner-dyanmic-loop-img-count)
+  .banner-images div:nth-child({i})
+    -webkit-animation-delay ((i - 1) * $banner-dyanmic-loop-each-seconds)s
+    animation-delay ((i - 1) * $banner-dyanmic-loop-each-seconds)s
+
+// 计算动画的各个阶段
+$step-4 = percentage(ceil(1 / $banner-dyanmic-loop-img-count, 1)) // 展示结束，准备淡出图片
+$step-6 = 100% // 结束
+$step-1 = 0% // 起始
+$step-2 = lerp($step-1, $step-4, 0.1) // 已经淡入图片
+$step-3 = lerp($step-1, $step-4, 0.6) // 正在展示中
+$step-5 = min(lerp($step-4, $step-6, 0.8), $step-4 + ($step-2 - $step-1)) // 已经淡出图片
+
+// 生成动画
+@keyframes banner-image-anim
+  {$step-1}
+    opacity 0
+    -webkit-animation-timing-function ease-in
+    animation-timing-function ease-in
+
+  {$step-2}
+    opacity 1
+
+  {$step-3}
+    opacity 1
+    transform scale(1.05)
+    -webkit-animation-timing-function ease-out
+    animation-timing-function ease-out
+
+  {$step-4}
+    opacity 1
+    transform scale(1.1)
+
+  {$step-5}
+    opacity 0
+    transform scale(1.1)
+
+  {$step-6}
+    opacity 0
+
+// ---------------------------------------
+// 视频 banner
+// ---------------------------------------
+
+.banner video
+  position absolute
+  width 100%
+  height 100%
+  top 50%
+  left 50%
+  -webkit-transform translate3d(-50%, -50%, 0)
+  transform translate3d(-50%, -50%, 0)
+  pointer-events none
+  // object-fit cover
+  // -o-object-fit cover
+  // object-position 80% 50%
+  // -o-object-position 80% 50%

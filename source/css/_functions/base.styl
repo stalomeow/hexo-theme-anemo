@@ -1,0 +1,33 @@
+/**
+ * 获取主题配置 (unquoted)
+ * @param name 配置名
+ * @param defaultValue 默认值
+ */
+theme-config(name, defaultValue = null)
+  unquote(hexo-config(name) != null ? hexo-config(name) : defaultValue)
+
+/**
+ * 获取主题配置 (unit)
+ * @param name 配置名
+ * @param defaultValue 默认值
+ * @param unit 单位
+ */
+theme-config-unit(name, defaultValue = null, unit)
+  unit(hexo-config(name) != null ? hexo-config(name) : defaultValue, unit)
+
+/**
+ * 获取主题配置 (origin)
+ * @param name 配置名
+ * @param defaultValue 默认值
+ */
+theme-config-origin(name, defaultValue = null)
+  (hexo-config(name) != null ? hexo-config(name) : defaultValue)
+
+/**
+ * 线性插值
+ * @param a 起始值
+ * @param b 终止值
+ * @param t
+ */
+lerp(a, b, t)
+  a + (b - a) * t

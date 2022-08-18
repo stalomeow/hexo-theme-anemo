@@ -1,0 +1,51 @@
+#loading-box
+  .loading-bg
+    position fixed
+    left 0
+    right 0
+    z-index $loading-box-z-index
+    width 100%
+    background-color var(--color-canvas-default)
+
+  .loading-bg, canvas
+    opacity 1
+    height: 100%
+    transition opacity .2s
+    -webkit-transition opacity .2s
+
+  canvas, p
+    position fixed
+    width 100%
+    z-index $loading-box-z-index + 1
+    pointer-events none
+
+  p
+    opacity 0
+    padding 0 2rem
+    bottom 1rem
+    font-size .5rem
+    text-align center
+
+body[loaded] #loading-box
+  .loading-bg, canvas
+    opacity 0
+
+  .loading-bg
+    pointer-events none
+
+body:not([loaded])
+  overflow hidden
+
+  #loading-box p.active
+    animation blink 2s infinite
+    -webkit-animation blink 2s infinite
+
+@keyframes blink
+  0%
+    opacity 0.3
+
+  50%
+    opacity 1
+
+  100%
+    opacity 0.3

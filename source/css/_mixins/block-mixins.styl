@@ -1,0 +1,57 @@
+/**
+ * 用于适配移动端，使用方法如下：
+ * xxxx
+ *   +mobile-device()
+ *     xxx xxx
+ *     xxx xxx
+ */
+mobile-device($max-width-inclusive=860px)
+  @media only screen and (max-width $max-width-inclusive)
+    {block}
+
+
+/**
+ * 用于适配暗色模式，使用方法如下：
+ * xxxx
+ *   +dark-mode()
+ *     xxx xxx
+ *     xxx xxx
+ *
+ * !注意下面这种写法不可以
+ * :root, .a, .b
+ *   +dark-mode()
+ *     xxx xxx
+ *
+ * 请改写成下面这种形式
+ * :root
+ *   +dark-mode()
+ *     xxx xxx
+ * .a, .b
+ *   +dark-mode()
+ *     xxx xxx
+ *
+ * :root 一定要单独分出来写
+ *
+ * 另外
+ * :root
+ *   +dark-mode()
+ *     xxx xxx
+ * 也可以写成
+ * +dark-mode()
+ *   xxx xxx
+ *
+ * .a, .b
+ *   +dark-mode()
+ *     xxx xxx
+ * 也可以写成
+ * +dark-mode()
+ *   .a, .b
+ *     xxx xxx
+ */
+dark-mode()
+  if selector() is ':root' // 适配 :root 的情况
+    &[data-color-scheme=dark]
+      {block}
+  else
+    :root[data-color-scheme=dark] &
+      {block}

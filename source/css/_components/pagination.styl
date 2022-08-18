@@ -1,0 +1,40 @@
+#pagination
+  margin 2rem 0
+  padding 1rem 0
+  text-align center
+  user-select none
+
+  a
+    padding 0.8125rem 2.1875rem
+    border 0.0625rem solid var(--img-border-color)
+    border-radius 3.125rem
+    color var(--text-color)
+    cursor pointer
+
+    &:hover
+      border-color var(--link-hover-color)
+      color var(--link-hover-color)
+
+    span:nth-child(2)
+      display none
+
+  &[loading] a
+    background url("/img/loading.gif")
+    background-position center
+    background-repeat no-repeat
+    background-size contain
+    pointer-events none // 避免重复点击
+    border none
+    cursor wait
+
+    span
+      display none
+
+  &[ended] a
+    cursor default
+
+    span:nth-child(1)
+      display none
+
+    span:nth-child(2)
+      display inline

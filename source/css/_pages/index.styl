@@ -1,0 +1,295 @@
+// 顶部公告内容
+.index-notice
+  position relative
+  padding 1.25rem
+  margin-top 3.75rem
+  margin-bottom 3.75rem
+  border-radius 0.3125rem
+  color var(--msg-box-text-color)
+  background var(--msg-box-bg-color)
+
+  +mobile-device()
+    margin-bottom 0
+
+  // 顶部小三角形
+  &::before
+    content ""
+    position absolute
+    top 0
+    width 0
+    height 0
+    border-left 0.625rem solid transparent
+    border-right 0.625rem solid transparent
+    border-bottom 0.625rem solid var(--msg-box-bg-color)
+    transform translateY(-100%)
+
+  i
+    float left
+    margin-right 0.625rem
+    color var(--icon-highlight-color)
+
+
+// 文章列表标题
+.index-main-title
+  font-size 1rem
+  font-weight 400
+  color var(--text-color)
+  padding-bottom 0.9375rem
+  border-bottom 0.0625rem dashed var(--separator-line-color)
+
+
+// 文章列表中的文章
+.index-post
+  margin 0 0 4% 0
+  position relative
+  animation fade-in-up-10px 1.5s linear
+
+  p
+    margin 0
+    min-height 3.75rem
+    font-size 0.9375rem
+    color var(--text-sec-color)
+    line-height 1.875rem
+    overflow hidden
+
+    +mobile-device()
+      font-size 0.875rem
+      height 1.875rem
+
+  hr
+    width 30%
+    height 0.0625rem
+    margin 0 auto
+    border 0
+    background var(--separator-line-color)
+
+    +mobile-device()
+      margin-top 20px
+
+
+// 主页的文章（正常模式）
+.index-post-normal
+  &-main // container
+    display flex
+    flex-direction row
+    align-items center
+
+    +mobile-device()
+      align-items flex-start
+
+  &-thumbnail // 缩略图
+    position relative
+    flex-shrink 0
+
+    a
+      width 6.25rem
+      height 6.25rem
+      display block
+
+      +mobile-device()
+        width 3.25rem
+        height 3.25rem
+
+    img
+      width 100%
+      height 100%
+      object-fit cover
+      border-radius 50%
+      padding 0.125rem
+      border 0.0625rem solid var(--img-border-color)
+
+  &-content // 文章信息
+    display flex
+    flex-direction column
+    width calc(100% - 6.25rem)
+    padding-left 1rem
+
+    +mobile-device()
+      width calc(100% - 3.25rem)
+
+  &-header // 文章的标题和发布时间的容器
+    display flex
+    flex-direction row
+    align-items center
+    justify-content space-between
+
+    +mobile-device()
+      flex-direction column
+      align-items flex-start
+
+  &-title // 文章标题
+    position relative
+    width 70%
+    margin 0
+    font-size 1.25rem
+    font-weight 400
+    line-height 3.125rem
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+    +mobile-device()
+      font-size 1rem
+      line-height 1.5
+      width 90%
+
+    a
+      font-weight 600
+      color var(--text-color)
+
+  &-time // 文章发布时间
+    font-size 0.75rem
+    color var(--text-sec-color)
+    white-space nowrap
+
+    i
+      font-size 0.8125rem
+
+      &.hot-post
+        color #FF3B00
+
+  &:hover &-thumbnail img // 光标悬停在普通文章上时，给头像一个晃动动画
+    animation shake 1s linear
+
+  &:hover &-title a // 光标悬停在普通文章上时，让文章标题高亮
+    color var(--link-hover-color)
+
+  &[without-thumbnail] &-thumbnail // 没缩略图时，隐藏该元素
+    display none
+
+  &[without-thumbnail] &-content // 没缩略图时，调整 content 的宽度
+    padding-left 0
+    width 100%
+
+
+// 主页的文章（动态模式）
+.index-post-dt
+  margin 3.125rem 0
+
+  +mobile-device()
+    margin 1.875rem 0
+
+  p
+    margin 0
+
+  &-main // container
+    display flex
+    flex-direction row
+    justify-content space-between
+    align-items center
+
+  &-content // 文章简介内容
+    position relative
+    width 100%
+    border-radius 5px
+    min-height 3.75rem
+    padding 0.9375rem 1.875rem
+    background var(--msg-box-bg-color)
+
+    +mobile-device()
+      padding 0.625rem .9375rem
+
+      p
+        margin-left 0
+        margin-top 0
+        height 1.875rem
+        overflow hidden
+
+    &::after // 右边的小三角形
+      content ""
+      position absolute
+      right 0
+      top 50%
+      width 0
+      height 0
+      border-left 0.625rem solid var(--msg-box-bg-color)
+      border-top 0.625rem solid transparent
+      border-bottom 0.625rem solid transparent
+      transform translate3d(100%, -50%, 0)
+
+  &-time // 文章发布时间
+    text-align right
+    font-size 0.75rem
+    color var(--text-sec-color)
+
+    i
+      font-size 0.75rem
+
+      &.hot-post
+        color #FF3B00
+
+  &-avatar // 文章作者头像
+    flex-shrink 0
+    margin-left 3rem
+
+    +mobile-device()
+      margin-left 1rem
+
+    a
+      display block
+      width 4.25rem
+      height 4.25rem
+
+      +mobile-device()
+        width 3.25rem
+        height 3.25rem
+
+    img
+      width 100%
+      height 100%
+      border-radius 50%
+      border 0.0625rem solid var(--img-border-color)
+
+  &:hover &-avatar img // 光标悬停在动态上时，给头像一个布丁动画
+    animation pudding 1s linear
+
+
+// 主页文章列表中每个文章元素的最后一个 div
+.index-post-footer
+  margin 0
+  list-style none
+
+  &-post-more // 文章右侧的省略号（三个点）
+    text-align right
+
+    +mobile-device()
+      display none
+
+    i
+      font-size 1.5625rem
+      color var(--icon-highlight-color)
+
+      &:hover
+        color var(--text-color)
+
+  &-more-info // 光标悬停在文章上时，左侧出现的文章数据
+    display flex
+    flex-direction column
+    position absolute
+    top 50%
+    padding-top 0.5rem
+    border-top 0.0625rem solid var(--text-sec-color)
+    transition 0.6s all ease-in-out
+    transform translate3d(0, -70%, 0)
+    visibility hidden
+    opacity 0
+
+    +mobile-device()
+      display none
+
+    .index-post:hover & // 光标悬停在文章上时显示更多文章数据
+      transform translate3d(calc(-100% - 1rem), -70%, 0)
+      visibility visible
+      opacity 1
+
+    span
+      color var(--text-sec-color)
+      font-size 0.8125rem
+
+    i
+      margin-top 0.1875rem
+      margin-right 0.625rem
+      float left
+
+    a
+      color var(--text-sec-color)

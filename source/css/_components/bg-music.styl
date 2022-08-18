@@ -1,0 +1,385 @@
+#bg-music-panel
+  flex-direction row
+  justify-content center
+
+.bg-music-cover-control
+  position relative
+  width calc(50% - 2rem - 1rem)
+  max-width 26rem
+  margin 2rem 1rem 2rem 2rem
+  display flex
+  flex-direction column
+  justify-content space-between
+
+  .bg-music-title
+    font-size 1.5rem
+    color var(--color-fg-default)
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .bg-music-subtitle
+    font-size .8rem
+    color var(--color-fg-muted)
+    overflow hidden
+    white-space nowrap
+    text-overflow ellipsis
+
+  .bg-music-cover
+    display flex
+    justify-content center
+    flex-grow 0
+    max-height 40%
+
+    .bg-music-disc-container
+      position relative
+
+      &:before
+        content ""
+        position absolute
+        background url(/img/play_needle.png) center/contain no-repeat
+        z-index 2
+        width 20%
+        height 30%
+        top 0
+        left 0
+        -webkit-transform rotateZ(-60deg)
+        transform rotateZ(-60deg)
+        -webkit-transform-origin 0 0
+        transform-origin 0 0
+        -webkit-transition -webkit-transform .5s linear
+        transition transform .5s linear
+
+
+      .bg-music-disc
+        position relative
+        width 100%
+        height 100%
+        -webkit-animation rotate360 20s linear infinite
+        animation rotate360 20s linear infinite
+        -webkit-animation-play-state paused
+        animation-play-state paused
+
+        img
+          width 100%
+          height 100%
+          border-radius 50%
+          object-fit contain
+          transform scale(0.7)
+
+        &:after
+          content ""
+          position absolute
+          background url(/img/play_disc.png) center/contain no-repeat
+          z-index 1
+          width 100%
+          height 100%
+          top 0
+          left 0
+
+  .bg-music-control
+    display flex
+    flex-direction column
+    align-items center
+    justify-content flex-start
+
+    .bg-music-time
+      width 100%
+      font-size .8rem
+      font-family miranafont, "Hiragino Sans GB", STXihei, "Microsoft YaHei", SimSun, sans-serif
+      color var(--color-fg-default)
+
+    .bg-music-progress
+      position relative
+      width 100%
+      height 2px
+      margin 5px 0
+      border-radius 6px
+      background rgba(100, 100, 100, 0.4)
+      cursor pointer
+
+      +dark-mode()
+        background rgba(175, 175, 175, 0.4)
+
+      .bg-music-progress-slider
+        position relative
+        width 0%
+        height 100%
+        background var(--color-fg-default)
+
+        &:after
+          content ''
+          position absolute
+          top 50%
+          right 0
+          width 12px
+          height 12px
+          border-radius 50%
+          background-color var(--color-fg-default)
+          -webkit-transform translateY(-50%) translateX(50%)
+          transform translateY(-50%) translateX(50%)
+          touch-action pan-x
+
+    .bg-music-buttons
+      display flex
+      flex-direction row
+      align-items center
+      justify-content space-between
+      width 90%
+      color var(--color-fg-default)
+
+      i
+        font-size 1.5rem
+
+      &>div
+        cursor pointer
+
+        &:nth-child(3) i
+          font-size 3rem
+
+      #bg-music-play-pause-button
+        i:nth-child(1) // play
+          display block
+
+        i:nth-child(2) // pause
+          display none
+
+.bg-music-info
+  position relative
+  width calc(50% - 2rem - 1rem)
+  max-width 26rem
+  margin 6rem 2rem 6rem 1rem
+
+  .bg-music-lyric-container
+    width 100%
+    height 100%
+    text-align center
+    overflow hidden
+    -webkit-mask linear-gradient(180deg, transparent, #fff 20%, #fff 80%, transparent) top
+    mask linear-gradient(180deg, transparent, #fff 20%, #fff 80%, transparent) top
+
+    .bg-music-lyric
+      -webkit-transition -webkit-transform .5s linear
+      transition transform .5s linear
+
+      p
+        padding 0.75rem 0 0.75rem 0
+        margin 0
+        line-height 1.5rem
+        color var(--color-fg-default)
+        opacity 0.4
+
+      p[current]
+        opacity 1
+
+#bg-music-btn
+  i:nth-child(1)
+    display block
+
+  i:nth-child(2)
+    display none
+
+  &[playing]
+    i:nth-child(1)
+      display none
+
+    i:nth-child(2)
+      display block
+      -webkit-animation rotate360 linear 5s 0s infinite
+      animation rotate360 linear 5s 0s infinite
+
+#bg-music-panel[playing]
+  .bg-music-disc-container:before
+    -webkit-transform rotateZ(-30deg)
+    transform rotateZ(-30deg)
+
+  .bg-music-disc
+    -webkit-animation-play-state running
+    animation-play-state running
+
+  #bg-music-play-pause-button
+    i:nth-child(1) // play
+      display none
+
+    i:nth-child(2) // pause
+      display block
+
+#bg-music-play-mode-button
+  i
+    display none
+
+  &[mode=loop] i:nth-child(1)
+    display block
+
+  &[mode=loop-one] i:nth-child(2)
+    display block
+
+  &[mode=random] i:nth-child(3)
+    display block
+
+.bg-music-playlist
+  .bg-music-playlist-mask
+    opacity 0
+    visibility hidden
+    -webkit-transition opacity .2s, visibility .2s
+    transition opacity .2s, visibility .2s
+
+  .bg-music-playlist-container
+    -webkit-transform translateY(calc(100% + 2rem))
+    transform translateY(calc(100% + 2rem))
+    -webkit-transition transform .2s ease-in-out
+    transition transform .2s ease-in-out
+
+  &[show]
+    .bg-music-playlist-mask
+      opacity 1
+      visibility visible
+
+    .bg-music-playlist-container
+      -webkit-transform translateY(0)
+      transform translateY(0)
+
+.bg-music-playlist-mask
+  position absolute
+  top 0
+  bottom 0
+  left 0
+  right 0
+  z-index 4
+  background rgba(0, 0, 0, 0.4)
+
+.bg-music-playlist-container
+  position absolute
+  bottom 1rem
+  left 1rem
+  right 1rem
+  height 60%
+  max-width 56rem
+  border-radius 15px
+  background var(--color-canvas-default)
+  color var(--color-fg-default)
+  z-index 5
+  margin 0 auto
+  padding 1rem
+  display flex
+  flex-direction column
+  justify-content flex-start
+
+  .bg-music-playlist-title
+    font-weight bold
+    padding-bottom 0.5rem
+
+  .bg-music-playlist-item-container
+    overflow-x hidden
+    overflow-y scroll
+
+    ul
+      padding 0
+      margin 0
+      list-style none
+      counter-reset counter
+
+      li
+        position relative
+        padding 1rem 3rem
+        cursor pointer
+        -webkit-transition background .2s ease-in-out
+        transition background .2s ease-in-out
+
+        i
+          display none
+
+        &>div
+          overflow hidden
+          white-space nowrap
+          text-overflow ellipsis
+
+        &>div:nth-child(2) // music title
+          font-size 0.9rem
+
+        &>div:nth-child(3) // music subtitle
+          font-size 0.7rem
+          color var(--color-fg-muted)
+
+        &::before
+          content counter(counter)
+          counter-increment counter
+          position absolute
+          top 50%
+          left 2rem
+          font-weight 700
+          color var(--color-fg-muted)
+          -webkit-transform translateY(-50%) translateX(-100%)
+          transform translateY(-50%) translateX(-100%)
+
+        &>div, &::before
+          -webkit-transition color .1s ease-in-out
+          transition color .1s ease-in-out
+
+        &:hover
+          background var(--color-canvas-hover)
+
+          &>div, &:before, i
+            color var(--color-accent-fg)
+
+        &[current]
+          padding-left 4rem
+          background var(--color-canvas-hover)
+
+          &>div, i
+            color var(--color-accent-emphasis)
+
+          &:before
+            display none
+
+          i
+            counter-increment counter // increase the counter here because &:before is hidden
+            display block
+            position absolute
+            top 50%
+            left 3rem
+            font-size 1.5rem
+            -webkit-transform translateY(-50%) translateX(-100%)
+            transform translateY(-50%) translateX(-100%)
+
+
+// 适配移动端
++mobile-device(540px)
+  .bg-music-cover-control
+    margin 2rem
+    width calc(100% - 2rem - 2rem)
+    max-width 100%
+    justify-content center
+
+    .bg-music-title-group
+      position absolute
+      left 0
+      top 0
+      right 0
+
+    .bg-music-control
+      position absolute
+      left 0
+      right 0
+      bottom 0
+
+  .bg-music-info
+    position absolute
+    top 6rem
+    bottom 10rem
+    left 2rem
+    right 2rem
+    margin 0
+    width calc(100% - 2rem - 2rem)
+    max-width 100%
+
+  .bg-music-cover, .bg-music-info
+    pointer-events none
+    opacity 0
+    visibility hidden
+    -webkit-transition opacity .5s, visibility .5s
+    transition opacity .5s, visibility .5s
+
+    &[mobile-active]
+      opacity 1
+      visibility visible

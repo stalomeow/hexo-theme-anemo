@@ -1,0 +1,93 @@
+#search-panel
+  flex-direction column
+
+.search-div, .search-result-list
+  position relative
+  max-width 700px
+  width 80%
+
+.search-div
+  margin 2rem auto 0.5rem auto
+
+  h1
+    font-size 23px
+    font-weight 600
+    color var(--color-fg-default)
+    text-align center
+    margin-bottom 30px
+
+    &:before
+      content "#"
+      margin-right 6px
+      color #ff6d6d
+      font-size 20px
+      font-weight 600
+
+  i
+    font-size 1rem
+    line-height 1
+    color var(--color-fg-muted)
+    position absolute
+    bottom 14px
+    margin-top -16px
+    left 16px
+
+  input
+    font-size 1rem
+    background none
+    padding 12px 24px 12px 45px
+    width 100%
+    outline none
+    border 1px solid var(--color-fg-muted)
+    border-radius 50px
+    box-sizing border-box
+    transition border-color 0.5s linear
+    color var(--color-fg-default)
+
+    &.valid
+      border-color #00c851
+
+    &.invalid
+      border-color #f44336
+
+.search-result-list
+  overflow-x hidden
+  overflow-y auto
+  margin 0.5rem auto 2rem auto
+
+  .search-result
+    display block
+    margin 1rem
+    cursor pointer
+    color var(--color-fg-default)
+
+    &>span
+      display block
+      font-size 1.1rem
+      font-weight bold
+      color var(--color-fg-default)
+      margin 0
+      overflow hidden
+      white-space nowrap
+      text-overflow ellipsis
+      transition color 0.2s linear
+
+    &>p
+      display block
+      margin 0 0 1.5rem 0
+      color var(--color-fg-muted)
+      transition color 0.2s linear
+
+    .search-word
+      color #ff4500
+      font-weight bold
+      text-decoration underline
+      // font-size 1.3rem
+
+    &:hover>span, &:hover>p
+      color var(--color-accent-emphasis)
+
+  .search-result-nothing
+    text-align center
+    user-select none
+    color var(--color-fg-muted)

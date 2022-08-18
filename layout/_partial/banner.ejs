@@ -1,0 +1,131 @@
+<%
+var subtitle;
+if (is_home() && theme.index.slogan.enable) {
+  subtitle = theme.index.slogan.text || config.subtitle || ''
+} else {
+  subtitle = page.subtitle || page.title || config.subtitle || ''
+}
+
+var banner_img = page.banner_img || theme.index.banner_img
+var banner_img_height = page.banner_img_height || theme.index.banner_img_height
+var banner_mask_alpha = page.banner_mask_alpha || theme.index.banner_mask_alpha
+var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.default ? theme.dark_mode.default : ''
+
+var banner_type; // 'single' | 'multi' | 'video' | null
+var img_library = theme.banner.dynamic_loop.img_library // multi-banner only
+var default_banner_styles = theme.banner.default_styles
+
+// 函数说明：
+// 将 url   转换为 { 'pic': url }
+// 将 url[] 转换为 { 'pic': url }[]
+function convert_to_pic_obj(o) {
+  if (Array.isArray(o)) {
+    for (var i = 0; i < o.length; i++) {
+      if (typeof o[i] === 'string') {
+        o[i] = { 'pic': o[i] };
+      }
+    }
+  } else if (typeof o === 'string') {
+    o = { 'pic': o };
+  }
+  return o;
+}
+
+if (typeof banner_img === 'string') {
+  banner_type = 'single';
+  banner_img = convert_to_pic_obj(banner_img); // 统一类型，下同
+} else if (Array.isArray(banner_img)) {
+  if (theme.banner.dynamic_loop.enable) {
+    banner_type = 'multi';
+    if (!img_library || img_library.length === 0) {
+      img_library = banner_img;
+    }
+    banner_img = convert_to_pic_obj(banner_img);
+    img_library = convert_to_pic_obj(img_library);
+  } else {
+    banner_type = 'single';
+    banner_img = convert_to_pic_obj(banner_img[0]);
+  }
+} else if ('pic' in banner_img) {
+  banner_type = 'single';
+} else if ('video' in banner_img) {
+  banner_type = 'video';
+} else {
+  banner_type = null;
+}
+
+var banner_parallax = theme.banner && theme.banner.parallax && 'parallax=true'
+
+// 别用 vh，iOS Safari 下很丑
+// 详见 https://blog.csdn.net/qq_40138556/article/details/122337874?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_paycolumn_v3&utm_relevant_index=2
+var banner_img_height_style = `style="height:${banner_img_height}vh;"`
+%>
+
+<% if (banner_type) { %> <%# 有 banner 的时候才生成 %>
+  <header class="banner pjax" <%- banner_parallax %> <%- banner_img_height_style %>>
+    <% if (banner_type === 'multi') { %> <%# 多图片切换 %>
+
+      <div class="banner-images">
+        <% for(let i = 0; i < theme.banner.dynamic_loop.img_count; i++) { %>
+          <% var img = (i >= banner_img.length) ? img_library[i % img_library.length] : banner_img[i] %>
+          <% var div_style = 'style="' + [
+            `background:url('${url_for(img.pic)}') no-repeat`,
+            `background-size:${img.size || default_banner_styles.pic.size}`,
+            `background-position:${img.pos || default_banner_styles.pic.pos}`
+          ].join(';') + '"' %>
+          <div <%- div_style %>></div>
+        <% } %>
+      </div>
+
+    <% } else if (banner_type === 'video') { %> <%# 播放视频 %>
+
+      <% var video_style = 'style="' + [
+        `object-fit:${banner_img.fit || default_banner_styles.video.fit}`,
+        `-o-object-fit:${banner_img.fit || default_banner_styles.video.fit}`,
+        `object-position:${banner_img.pos || default_banner_styles.video.pos}`,
+        `-o-object-position:${banner_img.pos || default_banner_styles.video.pos}`
+      ].join(';') + '"' %>
+      <video autoplay loop muted playsinline webkit-playsinline
+        poster="<%- banner_img.poster || '' %>"
+        src="<%- banner_img.video %>"
+        <%- video_style %>>
+      </video>
+
+    <% } else if (banner_type === 'single') { %> <%# 一张图片 %>
+
+      <% var div_style = 'style="' + [
+        `background:url('${url_for(banner_img.pic)}') no-repeat`,
+        `background-size:${banner_img.size || default_banner_styles.pic.size}`,
+        `background-position:${banner_img.pos || default_banner_styles.pic.pos}`
+      ].join(';') + '"' %>
+      <div <%- div_style %>></div>
+
+    <% } %>
+
+    <% var mask_style = `style="background-color:rgba(0,0,0,${parseFloat(banner_mask_alpha)})"` %>
+    <div class="banner-mask" <%- mask_style %>>
+      <%# 标题 %>
+      <div class="page-title">
+        <span id="subtitle" title="<%= subtitle %>">
+          <% //if(!theme.fun_features.typing.enable) { %>
+            <%- subtitle %>
+          <% //} %>
+        </span>
+      </div>
+
+      <%# 向下滚动提示 %>
+      <% if (theme.scroll_down_tip.enable && theme.scroll_down_tip.banner_height_limit <= banner_img_height && page.layout !== '404') { %>
+        <div class="scroll-down-tip">
+          <i class="<%- theme.iconfont.class_map.mouse %>"></i>
+          <div class="line"></div>
+        </div>
+      <% } %>
+
+      <!-- <div class="banner-illust">
+        花久花酒
+      </div> -->
+    </div>
+  </header>
+<% } else { %>
+  <header class="pjax"></header>
+<% } %>

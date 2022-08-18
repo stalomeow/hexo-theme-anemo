@@ -1,0 +1,10 @@
+<%# Argument: assets(object) %>
+
+<%
+if (theme.fancybox.enable && page.fancybox === true) {
+  assets.fancybox = [
+    url_join(theme.static_prefix.fancybox, 'fancybox.css'),
+    url_join(theme.static_prefix.fancybox, 'fancybox.umd.js')
+  ];
+}
+%>

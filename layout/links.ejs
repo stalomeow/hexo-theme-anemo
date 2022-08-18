@@ -1,0 +1,43 @@
+<%
+var layout = page.layout
+page.title = page.title || __(`${ layout }.title`)
+page.subtitle = page.subtitle || page.title || __(`${ layout }.subtitle`)
+page.banner_img = page.banner_img || theme.page.banner_img
+page.banner_img_height = page.banner_img_height || theme.page.banner_img_height
+page.banner_mask_alpha = page.banner_mask_alpha || theme.page.banner_mask_alpha
+%>
+
+<article class="hentry">
+  <header class="entry-header">
+    <h1 class="entry-title"><%= page.title || page.subtitle %></h1>
+  </header>
+
+  <div class="link-list">
+    <% for(const each of theme.links.items || []) { %>
+      <% if (!each.title || !each.link) continue %>
+      <div class="link-list-card">
+        <a href="<%= url_for(each.link) %>" class="card-body" target="_blank" rel="noopener">
+          <div class="card-content">
+            <% if (each.avatar || each.image) { %>
+              <div class="link-avatar my-auto">
+                <img
+                  src="<%= url_for(each.avatar || each.image) %>"
+                  alt="<%= each.title %>"
+                  onerror="this.onerror=null;this.src=this.srcset='<%= url_for(theme.links.onerror_avatar) %>'"
+                />
+              </div>
+            <% } %>
+            <div class="link-text">
+              <div class="link-title"><%- each.title %></div>
+              <div class="link-intro"><%- each.intro || '' %></div>
+            </div>
+          </div>
+        </a>
+      </div>
+    <% } %>
+  </div>
+
+  <div class="markdown-body">
+    <%- page.content %>
+  </div>
+</article>

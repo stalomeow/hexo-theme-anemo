@@ -1,0 +1,153 @@
+.post-footer
+  padding 20px 10px
+  margin-top 30px
+  position relative
+
+.post-tags
+  width 100%
+  font-size 13px
+  color #B3B3B3
+  font-family din, 'Hiragino Sans GB', 'Microsoft Yahei', Arial, sans-serif
+
+  a
+    color #B3B3B3
+    margin-right 3px
+
+    &:hover
+      color #A0DAD0
+
+  i
+    margin-right 6px
+
+.post-like
+  float left
+  padding-left 2px // 和标签稍微对齐一下
+
+  a
+    color #9FE0DD
+    font-size 13px
+
+    &:hover
+      color #FF4646
+
+  i
+    font-size 13px
+
+.post-share
+  float right
+  list-style none
+
+  img:hover
+    opacity .8
+
+  ul
+    list-style none
+    margin 0
+    padding 0
+    opacity 0
+    display inline-block
+    top -3px
+    position relative
+    -webkit-transition opacity .4s ease-out
+    transition opacity .4s ease-out
+
+    li
+      i
+        font-size 20px
+
+      a:hover
+        color #A0DAD0
+
+  li
+    float left
+    margin-right 20px
+
+  span
+    float left
+    margin-right 10px
+
+  .show-share
+    margin-left 10px
+    cursor pointer
+    opacity .6
+    float right
+    -webkit-transition opacity .1s ease-out
+    transition opacity .1s ease-out
+
+.sharehidden img
+  width 32px
+
+.post-share:hover .show-share, .post-share:hover .sharehidden
+  opacity 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+.breadcrumbs
+  font-size: 14px
+  color: #D2D2D2
+  text-decoration:none
+  margin-bottom: 30px
+  overflow-x: scroll
+  overflow-y: hidden
+  white-space: nowrap
+
+
+.breadcrumbs a
+  font-size: 14px
+  color: #D2D2D2
+
+
+
+h1.entry-title
+  font-size: 23px
+  font-weight: 600
+  color: #737373
+
+
+.entry-header h1:before
+  content: "#"
+  margin-right: 6px
+  color: #ff6d6d
+  font-size: 20px
+  font-weight: 600
+
+
+.entry-header hr
+  width:100%
+  height:1px
+  border: 0
+  background: #EFEFEF
+  margin: 15px 0
+
+
+.Extendfull img
+  width:100%
+  border: 5px solid #F3F3F3
+
+
+h1.page-title
+  font-size: 16px
+  font-weight: 400
+  border: 1px dashed #ddd
+  padding: 10px 15px
+  color: #828282
+  margin-bottom: 30px
+  font-family: miranafont,"Hiragino Sans GB",STXihei,"Microsoft YaHei",SimSun,sans-serif
+
+h1.page-title.mb-
+  margin-top: 100px
+
+
+@media (max-width: 860px)
+  .entry-header h1:before
+    font-size 19px

@@ -1,0 +1,147 @@
+<%
+
+%>
+
+<!-- 顶部公告内容 -->
+<div class="index-notice">
+  <i class="<%- theme.iconfont.class_map.notice %>"></i>
+  <div class="index-notice-content">
+    <%- theme.index.notice %>
+  </div>
+</div>
+
+<!-- 主页内容 -->
+<h1 class="index-main-title"><%- __('index.posts') %></h1>
+
+<!-- 开始文章循环输出 -->
+<div class="index-post-list">
+  <% page.posts.each(function (post, i) { %>
+    <article class="index-post">
+      <%
+        var post_url = url_for(post.path);
+        var post_class, post_attr;
+
+        if (post.dt_mode) {
+          post_class = "index-post-dt";
+          post_attr = '';
+        } else {
+          post_class = "index-post-normal";
+          post_attr = post.thumbnail ? '' : 'without-thumbnail';
+        }
+      %>
+
+      <div class="<%- post_class %>" <%- post_attr %>>
+
+        <% if (post.dt_mode) { %> <%# 动态模式 %>
+
+          <div class="index-post-dt-main">
+            <div class="index-post-dt-content">
+              <a href="<%= post_url %>">
+                <p>
+                  <% var excerpt = post.description || post.excerpt || (theme.index.auto_excerpt.enable && post.content) || '' %>
+                  <%- escape_html(strip_html(excerpt).substring(0, 200).trim()).replace(/\n/g, ' ') %>
+                </p>
+
+                <div class="index-post-dt-time">
+                  <i class="<%- theme.iconfont.class_map.time %>"></i>
+                  <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>">
+                    <%- date(post.date, config.date_format) %>
+                  </time>
+
+                  <i class="<%- theme.iconfont.class_map.fire %> hot-post"></i>
+                </div>
+              </a>
+            </div>
+
+            <div class="index-post-dt-avatar">
+              <a href="<%= post_url %>">
+                <img alt="avatar" src="<%- theme.author.avatar %>">
+              </a>
+            </div>
+          </div>
+
+        <% } else { %> <%# 普通模式 %>
+
+          <div class="index-post-normal-main">
+            <div class="index-post-normal-thumbnail">
+              <a href="<%= post_url %>" target="<%- //theme.index.post_url_target %>">
+                <% if(post.thumbnail) { %>
+                  <img src="<%- url_for(post.thumbnail) %>" alt="<%= post.title %>">
+                <% } %>
+              </a>
+            </div>
+
+            <div class="index-post-normal-content">
+              <div class="index-post-normal-header">
+                <h1 class="index-post-normal-title">
+                  <% if (post.sticky > 0) { %>
+                    <span style="color:#ff6d6d;font-weight:600"><%- __('index.top') %></span>
+                  <% } %>
+                  <a href="<%= post_url %>" target="<%- //theme.index.post_url_target %>">
+                    <%= post.title %>
+                  </a>
+                </h1>
+
+                <div class="index-post-normal-time">
+                  <i class="<%- theme.iconfont.class_map.time %>"></i>
+                  <time datetime="<%= full_date(post.date, 'YYYY-MM-DD HH:mm') %>">
+                    <%- date(post.date, config.date_format) %>
+                  </time>
+
+                  <i class="<%- theme.iconfont.class_map.fire %> hot-post"></i>
+                </div>
+              </div>
+
+              <a href="<%= post_url %>" target="<%- //theme.index.post_url_target %>">
+                <p>
+                  <% var excerpt = post.description || post.excerpt || (theme.index.auto_excerpt.enable && post.content) || '' %>
+                  <%- escape_html(strip_html(excerpt).substring(0, 200).trim()).replace(/\n/g, ' ') %>
+                </p>
+              </a>
+
+            </div>
+          </div>
+
+        <% } %>
+
+        <!-- 文章下碎碎念 -->
+        <footer class="index-post-footer">
+
+          <% if (!post.dt_mode) { %>
+            <div class="index-post-footer-post-more">
+              <a href="<%= post_url %>" target="<%- //theme.index.post_url_target %>">
+                <i class="<%- theme.iconfont.class_map.more %>"></i>
+              </a>
+            </div>
+          <% } %>
+
+          <div class="index-post-footer-more-info">
+            <div>
+              <span>
+                <i class="<%- theme.iconfont.class_map.comment %>"></i>
+                <a href="<%= post_url %>" target="<%- //theme.index.post_url_target %>">
+                  5w 条评论
+                </a>
+              </span>
+            </div>
+            <div>
+              <span>
+                <i class="<%- theme.iconfont.class_map.view %>"></i>
+                <a href="<%= post_url %>" target="<%- //theme.index.post_url_target %>">
+                  13w 次阅读
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </footer>
+
+      </div>
+
+      <hr>
+
+    </article>
+  <% }) %>
+</div>
+
+<%- partial('_partial/pagination', { pageContentSeletcor: '.index-post-list' }) %>

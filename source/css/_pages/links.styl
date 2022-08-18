@@ -1,0 +1,76 @@
+.link-list
+  display flex
+  flex-wrap wrap
+
+  +mobile-device(580px)
+    flex-direction column
+    justify-content center
+    align-items center
+
+  &-card
+    display flex
+    flex 0 0 50%
+    max-width 50%
+    min-width 50%
+
+    +mobile-device(580px)
+      flex 0 0 100%
+      max-width 100%
+      min-width 100%
+      padding-left 2rem
+      padding-right 2rem
+
+  .card-body
+    display block
+    width 100%
+    margin 1rem 0
+    padding 1rem
+
+    &:hover .link-avatar
+      transform rotate(360deg)
+      -webkit-transform rotate(360deg)
+
+  .card-content
+    display flex
+    flex-wrap nowrap
+    width 100%
+    height 3.5rem
+
+.link-avatar
+  flex none
+  width 3rem
+  height 3rem
+  margin-right .75rem
+  object-fit cover
+  transition transform .3s ease-in-out, filter .2s
+  -webkit-transition -webkit-transform .3s ease-in-out, filter .2s
+
+  img
+    width 100%
+    height 100%
+    border-radius 50%
+    background-color transparent
+    object-fit cover
+
+.link-text
+  flex 1
+  display grid
+  flex-direction column
+
+.link-title
+  overflow hidden
+  text-overflow ellipsis
+  white-space nowrap
+  color var(--text-color)
+  font-weight bold
+
+.link-intro
+  max-height 2rem
+  font-size 0.85rem
+  line-height 1.2
+  color var(--text-sec-color)
+  display -webkit-box
+  -webkit-box-orient vertical
+  -webkit-line-clamp 2
+  text-overflow ellipsis
+  overflow hidden

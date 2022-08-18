@@ -1,0 +1,11 @@
+<% var pageAssets = {} %>
+
+<%# include assets %>
+<% partial('_partial/assets/code-highlight', { assets: pageAssets }) %>
+<% partial('_partial/assets/fancybox', { assets: pageAssets }) %>
+<% partial('_partial/assets/twikoo', { assets: pageAssets }) %>
+<%# end include assets %>
+
+<script data-config>
+  var PAGE_ASSETS = <%- JSON.stringify(pageAssets) %>;
+</script>

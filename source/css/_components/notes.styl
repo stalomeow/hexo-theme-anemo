@@ -1,0 +1,41 @@
+// 自定义容器 from theme fluid
+.note
+  padding 0.75rem
+  border-left 0.35rem solid
+  border-radius 0.25rem
+  margin 1.5rem 0
+  font-size 0.9rem
+  transition color 0.2s ease-in-out, background-color 0.2s ease-in-out
+
+  *:last-child
+    margin-bottom 0
+
+.note-primary
+  @extend .note
+  background-color rgba(183,160,224,0.25)
+  border-color #6f42c1
+
+.note-secondary
+  @extend .note
+  background-color rgba(187,187,187,0.25)
+  border-color #777
+
+.note-success
+  @extend .note
+  background-color rgba(174,220,174,0.25)
+  border-color #5cb85c
+
+.note-danger
+  @extend .note
+  background-color rgba(236,169,167,0.25)
+  border-color #d9534f
+
+.note-warning
+  @extend .note
+  background-color rgba(248,214,166,0.25)
+  border-color #f0ad4e
+
+.note-info
+  @extend .note
+  background-color rgba(160,197,228,0.25)
+  border-color #428bca

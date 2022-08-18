@@ -1,0 +1,94 @@
+.toc
+  position sticky
+  top 100px
+  width 100%
+  padding 0
+  margin 0
+  visibility hidden
+
+  +mobile-device()
+    position relative
+    top 0
+
+  .toc-header
+    position relative
+    margin-bottom .5rem
+    font-weight bold
+    line-height 1
+    color var(--color-fg-default)
+
+    &, &>i
+      font-size 1.3rem
+
+    &::after
+      content attr(progress-percentage)
+      position absolute
+      top 0
+      right 0
+      color var(--color-fg-muted)
+      font-weight bold
+      font-style italic
+      font-size 1.2rem
+
+  .toc-body
+    overflow-y auto
+
+    &>ol
+      position relative
+
+    ol
+      list-style none
+      padding-inline-start 1rem
+      margin 0
+
+    &::-webkit-scrollbar
+      display none
+
+.tocbot-list
+  ol
+    list-style none
+    padding-left 1rem
+
+  a
+    font-size 0.9rem
+
+    &::active, &::focus
+      color var(--color-fg-default)
+
+.tocbot-link
+  width 100%
+  display inline-block
+  white-space nowrap
+  text-overflow ellipsis
+  overflow hidden
+  color var(--color-fg-default)
+
+.tocbot-active-link
+  font-weight bold
+  color var(--color-accent-emphasis)
+
+.tocbot-is-collapsed
+  max-height 0
+
+.tocbot-is-collapsible
+  overflow hidden
+  transition all .3s ease-in-out
+
+.toc-list-item
+  &.is-active-li::before
+    height 1rem
+    margin 0.25rem 0
+    visibility visible
+
+  &::before
+    width 0.3rem
+    height 0.2rem
+    position absolute
+    top auto
+    left 0
+    content ''
+    border-radius 2px
+    margin 0.65rem 0
+    background var(--color-accent-emphasis)
+    visibility hidden
+    transition height .1s ease-in-out, margin .1s ease-in-out, visibility .1s ease-in-out

@@ -1,0 +1,49 @@
+<div class="sidebar-mask"></div>
+<div class="sidebar-panels" <%# panel="overview" %>>
+  <div class="sidebar-switches">
+    <div target-panel="toc">
+      <i class="iconfont icon-stream-fill"></i>
+    </div>
+    <div target-panel="overview">
+      <i class="iconfont icon-home"></i>
+    </div>
+  </div>
+
+  <div class="toc-container pjax">
+    <% if (is_post()) { %>
+      <%- partial('_partial/toc') %>
+    <% } %>
+  </div>
+
+  <div class="site-overview">
+    <% for(const each of theme.navbar.menu || []) { %>
+      <% if (!each.submenu && !each.link) continue %>
+
+      <% var text = each.name || __(each.key + '.title') %>
+      <% if (text.indexOf('.title') !== -1) { text = each.key } %>
+
+      <div class="map-section">
+        <a href="<%= each.link ? url_for(each.link) : "javascript:void(0)" %>">
+          <%- each.icon ? '<i class="' + each.icon + '"></i>' : '' %>
+          <%- text %>
+        </a>
+
+        <% if (each.submenu) { %>
+          <div class="map-section-items">
+            <% for(const subEach of each.submenu) { %>
+              <% if (!subEach.link) continue %>
+
+              <% var subText = subEach.name || __(subEach.key + '.title') %>
+              <% if (subText.indexOf('.title') !== -1) { subText = subEach.key } %>
+
+              <a href="<%= url_for(subEach.link) %>">
+                <%- subEach.icon ? '<i class="' + subEach.icon + '"></i>' : '' %>
+                <%- subText %>
+              </a>
+            <% } %>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</div>

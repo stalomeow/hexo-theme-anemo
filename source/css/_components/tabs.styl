@@ -1,0 +1,36 @@
+.tabs
+  position relative
+  margin 0 0 20px
+  border 1px solid var(--color-border-default)
+
+  .tabs-nav
+    display flex
+    flex-wrap wrap
+    margin 0
+    padding 0
+    list-style none
+    background var(--color-canvas-subtle)
+
+    li
+      margin 0
+      padding 8px 18px
+      border-top 2px solid transparent
+      transition all .4s
+      line-height 2
+      cursor pointer
+
+      +mobile-device()
+        flex-grow 1
+
+      &[active]
+        border-top 2px solid var(--color-accent-emphasis)
+        background var(--color-canvas-default)
+        cursor default
+
+  .tab
+    overflow auto
+    padding 1.25rem
+    animation fade-in-up-10px 0.2s linear
+
+  .tab:not([active])
+    display none

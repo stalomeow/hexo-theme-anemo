@@ -1,0 +1,197 @@
+// 导航栏
+.navbar
+  position fixed
+  top 0
+  width 100%
+  z-index 99
+  backdrop-filter blur(5px)
+  transition all .3s ease
+
+  background rgba(convert($css-light-vars.--color-canvas-default), 0.3)
+
+  +dark-mode()
+    background rgba(convert($css-dark-vars.--color-canvas-default), 0.3)
+
+
+// 导航栏上的元素
+.navbar .navbar-items
+  display flex
+  flex-direction row
+  align-items center
+  justify-content space-between
+  width 100%
+  padding 0 50px
+
+  // 网站名
+  .site-branding
+    position relative
+    height 80px
+    line-height 80px
+
+    .site-title
+      margin 0
+      white-space nowrap // TODO: 还要优化，如果导航栏东西挤不下怎么办？
+
+      a
+        color var(--color-fg-default)
+        font-weight 400
+
+        &:hover
+          color var(--color-accent-emphasis)
+
+  // 菜单
+  .navbar-menus
+    display flex
+    flex-direction row
+    align-items center
+    position relative
+    margin-left auto
+
+  .pc-only-menu, .tool-menu
+    display flex
+    flex-direction row
+    align-items center
+    list-style none
+    margin 0
+    padding 0
+    -webkit-transition: opacity .4s ease-out
+    transition opacity .4s ease-out
+
+    li // 下面所有的 li，包括子菜单的 li
+      position relative
+      white-space nowrap
+
+      a
+        padding 12px 15px
+        display inline-block
+        color var(--color-fg-default)
+
+        &:hover
+          color var(--color-accent-emphasis)
+
+  .pc-only-menu li
+    ul // submenu
+      display none
+      position absolute
+      top 100%
+      left 0
+      min-width 120px
+      z-index 9999
+      padding 10px
+      margin 0
+      opacity 1
+      list-style none
+      text-align left
+      background var(--color-canvas-subtle)
+      border-radius 5px
+      box-shadow 0px 0px 4px rgba(84, 84, 84, 0.36)
+      -webkit-animation fade-in-up-10px .2s .1s ease both
+      animation fade-in-up-10px .2s .1s ease both
+
+      li
+        margin 0
+        padding 0
+
+      li, a
+        font-size 13px
+        width 100%
+
+    &:hover ul // submenu show
+      display flex
+      flex-direction column
+      -webkit-transition all 0.2s
+      transition all 0.2s
+
+
+// 打开、关闭侧边栏的按钮
+.sidebar-toggler
+  padding 0.25rem 0.75rem
+  font-size 1.25rem
+  line-height 1
+  background-color transparent
+  // color rgba(255,255,255,.5)
+  border 0
+  outline 0
+  display none
+
+  .animated-icon
+    width 30px
+    height 20px
+    position relative
+    margin 0
+    cursor pointer
+
+    span
+      display block
+      position absolute
+      left 0
+      width 100%
+      height 1px
+      opacity 1
+      background var(--color-fg-default)
+      transform rotate(0deg)
+      transition all .25s ease-in-out
+
+      &:nth-child(1)
+        top 0
+
+      &:nth-child(2)
+        top 10px
+
+      &:nth-child(3)
+        top 20px
+
+  &.open .animated-icon span
+    &:nth-child(1)
+      top 11px
+      -webkit-transform rotate(135deg)
+      transform rotate(135deg)
+
+    &:nth-child(2)
+      opacity 0
+      left -60px
+
+    &:nth-child(3)
+      top 11px
+      -webkit-transform rotate(-135deg)
+      transform rotate(-135deg)
+
+
+#color-scheme-btn
+  i:nth-child(1)
+    display block
+
+  i:nth-child(2)
+    display none
+
+  +dark-mode()
+    i:nth-child(1)
+      display none
+
+    i:nth-child(2)
+      display block
+
+
+// 给这些时而出现时而消失的元素增加过渡
+.pc-only-menu, .sidebar-toggler, .site-branding
+  -webkit-animation fade-in 1.5s
+  animation fade-in 1.5s // 延迟 1.5s
+
+
+// 适配移动端
++mobile-device()
+  .navbar-items
+    padding 0 5px !important
+
+    .pc-only-menu
+      display none !important
+
+  .sidebar-toggler
+    display block !important
+
+  .site-branding
+    display none
+
+  .site-title
+    font-size 20px
+    margin-right 10px

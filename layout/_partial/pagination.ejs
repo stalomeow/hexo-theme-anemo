@@ -1,0 +1,15 @@
+<%# Argument: pageContentSeletcor(string) %>
+
+<% if (page.total > 1){ %>
+  <div id="pagination" <%- ((page.current == page.total) ? 'ended' : '') %>>
+    <a
+      current="<%- page.current %>"
+      total="<%- page.total %>"
+      format="<%- `${config.pagination_dir}/%d/` %>"
+      selector="<%- pageContentSeletcor %>"
+    >
+      <span>加载更多</span>
+      <span>没有啦</span>
+    </a>
+  </div>
+<% } %>

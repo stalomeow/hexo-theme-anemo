@@ -1,0 +1,32 @@
+<% if(theme.post.prev_next.enable && !page.hide) { %>
+  <div class="post-prevnext">
+    <% const prev = prev_post(page) %>
+    <% const next = next_post(page) %>
+
+    <% if (prev) { %>
+      <article class="post-prev" <%- ((prev && next) ? '' : 'style="width:100%;"') %>>
+        <a href="<%= url_for(prev.path) %>">
+          <img src="<%= static_banner_img_url(prev) %>">
+          <div class="prevnext-info">
+            <i class="<%- theme.iconfont.class_map.arrowleft %>"></i>
+            <div class="prevnext-label"><%= __('post.pre') %></div>
+            <div class="prevnext-title"><%- prev.title %></div>
+          </div>
+        </a>
+      </article>
+    <% } %>
+
+    <% if (next) { %>
+      <article class="post-next" <%- ((prev && next) ? '' : 'style="width:100%;"') %>>
+        <a href="<%= url_for(next.path) %>">
+          <img src="<%= static_banner_img_url(next) %>">
+          <div class="prevnext-info">
+            <i class="<%- theme.iconfont.class_map.arrowright %>"></i>
+            <div class="prevnext-label"><%= __('post.next') %></div>
+            <div class="prevnext-title"><%- next.title %></div>
+          </div>
+        </a>
+      </article>
+    <% } %>
+  </div>
+<% } %>

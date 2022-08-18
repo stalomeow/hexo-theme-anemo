@@ -1,0 +1,9 @@
+<%# Argument: assets(object) %>
+
+<%
+if (page.comment && (is_post() || is_page())) {
+  assets.twikoo = [
+    url_join(theme.static_prefix.twikoo, 'twikoo.all.min.js')
+  ];
+}
+%>

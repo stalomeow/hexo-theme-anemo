@@ -1,0 +1,51 @@
+<%
+page.layout = "archive"
+page.title = theme.archive.title || __('archive.title')
+page.subtitle = theme.archive.subtitle || __('archive.subtitle')
+page.banner_img = theme.archive.banner_img
+page.banner_img_height = theme.archive.banner_img_height
+page.banner_mask_alpha = theme.archive.banner_mask_alpha
+%>
+
+<article class="hentry">
+  <div id="archives-temp">
+    <h2><%= page.title || page.subtitle %></h2>
+
+  <div id="archives-content">
+    <% var month = null %>
+    <% page.posts.each(function (post, i) { %>
+
+      <% var postMonth = date(post.date, "YYYY-MM") %>
+      <% if (postMonth !== month) { %>
+        <% if (month !== null) { %>
+            </div>
+          </div>
+        <% } %>
+
+        <% month = postMonth %>
+
+        <div class="archive-title">
+          <span class="ar-time"><i class="<%- theme.iconfont.class_map.time %>"></i></span>
+          <h3><%- postMonth %></h3>
+          <div class="archives archives-4" id="monlist">
+      <% } %>
+
+      <span class="ar-circle"></span>
+      <div class="arrow-left-ar"></div>
+      <div class="brick">
+        <a href="<%= url_for(post.path) %>">
+          <span class="time">
+            <i class="<%- theme.iconfont.class_map.time %>"></i>
+            <%- date(post.date, "MM-DD") %>
+          </span>
+          <%= post.title %>
+        </a>
+      </div>
+    <% }) %>
+
+    </div>
+    </div>
+  </div>
+</article>
+
+<%- partial('_partial/pagination', { pageContentSeletcor: '#archives-content' }) %>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="<%= config.language %>" data-default-color-scheme="<%= theme.color_scheme %>">
+
+  <%- partial('_partial/head') %>
+
+  <body>
+    <%- partial('_partial/loading-box') %>
+
+    <%- partial('_partial/nav') %>
+
+    <%- partial('_partial/banner') %>
+
+    <!-- MAIN PAGE -->
+    <div id="page">
+      <div class="page-aside"></div>
+
+      <div id="content" class="site-content pjax">
+        <%- body %>
+
+        <% if(page.comment && theme.comments.enable) { %>
+          <!-- COMMENTS -->
+          <section id="comments" class="comments">
+            <% if (typeof page.comments === 'string' && page.comments !== '') { %>
+              <% type = '_partial/comments/' + page.comment %>
+            <% } else { %>
+              <% type = '_partial/comments/' + theme.comments.type %>
+            <% } %>
+            <%- partial(type) %>
+          </section>
+        <% } %>
+      </div>
+
+      <div class="page-aside sidebar">
+        <%- partial('_partial/sidebar') %>
+      </div>
+    </div>
+
+    <%- partial('_partial/footer') %>
+
+    <!-- SEARCH -->
+    <%- partial('_partial/search') %>
+
+    <!-- BACKGROUND MUSIC -->
+    <%- partial('_partial/bg-music') %>
+
+    <!-- SCRIPTS -->
+    <%- partial('_partial/scripts') %>
+
+    <!-- PAGE CONFIG -->
+    <%- partial('_partial/page-config') %>
+  </body>
+</html>

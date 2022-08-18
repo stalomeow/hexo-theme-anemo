@@ -1,0 +1,45 @@
+.top-layer-panel
+  z-index 99999
+  position fixed
+  top 0
+  bottom 0
+  left 0
+  right 0
+  overflow hidden
+  display none
+  backdrop-filter blur(10px)
+  background rgba(convert($css-light-vars.--color-canvas-default), 0.6)
+
+  +dark-mode()
+    background rgba(convert($css-dark-vars.--color-canvas-default), 0.6)
+
+  &[state=opening]
+    display flex
+    pointer-events none
+    -webkit-animation fade-zoom-in 0.2s ease
+    animation fade-zoom-in 0.2s ease
+
+  &[state=opened]
+    display flex
+
+  &[state=closing]
+    display flex
+    pointer-events none
+    opacity 0 // make it invisible
+    -webkit-animation fade-zoom-out 0.2s ease
+    animation fade-zoom-out 0.2s ease
+
+  &[state=closed]
+    display none
+
+  .top-layer-panel-close-btn
+    position absolute
+    top 0.5rem
+    right 0.5rem
+    line-height 1
+    cursor pointer
+
+    i
+      font-size 30px
+      color var(--color-fg-muted)
+      line-height 1

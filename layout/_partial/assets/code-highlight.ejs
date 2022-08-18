@@ -1,0 +1,43 @@
+<%# Argument: assets(object) %>
+
+<%
+if ((is_post() || is_page()) && theme.code.highlight.enable) {
+  if (theme.code.highlight.lib === 'highlightjs') {
+    let cssName = theme.code.highlight.highlightjs.style
+      .toLowerCase()
+      .replace(/([^0-9])\s([^0-9])/g, '$1-$2')
+      .replace(/\s/g, '');
+    assets.highlightjs = [
+      url_join(theme.static_prefix.highlightjs, `/styles/${cssName}.min.css`)
+    ];
+  } else if (theme.code.highlight.lib === 'prismjs') {
+    let style = theme.code.highlight.prismjs.style;
+    let cssUrl;
+
+    if (/\.css$/.test(style)) {
+      cssUrl = style;
+    } else {
+      var cssName;
+
+      if (!style || style === 'default') {
+        cssName = '';
+      } else {
+        cssName = style.toLowerCase().replace(/[\s\-]/g, '');
+        if (cssName === 'prism') { cssName = ''; }
+        if (cssName === 'tomorrownight') { cssName = 'tomorrow'; }
+      }
+
+      cssName = cssName ? ('prism-' + cssName) : 'prism';
+      cssUrl = url_join(theme.static_prefix.prismjs, `/themes/${cssName}.min.css`);
+    }
+
+    assets.prismjs = [cssUrl];
+
+    if (theme.code.highlight.line_number) {
+      assets.prismjs.push(
+        url_join(theme.static_prefix.prismjs, '/plugins/line-numbers/prism-line-numbers.min.css')
+      );
+    }
+  }
+}
+%>

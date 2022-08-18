@@ -1,0 +1,71 @@
+<div id="bg-music-panel" class="top-layer-panel" role="music">
+  <div class="top-layer-panel-close-btn">
+    <i class="<%- theme.iconfont.class_map.close %>"></i>
+  </div>
+  <audio></audio>
+  <div class="bg-music-cover-control">
+    <div class="bg-music-title-group">
+      <div class="bg-music-title">Title</div>
+      <div class="bg-music-subtitle">Subtitle</div>
+    </div>
+    <div class="bg-music-cover" mobile-active>
+      <div class="bg-music-disc-container">
+        <div class="bg-music-disc">
+          <img>
+        </div>
+      </div>
+    </div>
+    <div class="bg-music-control">
+      <div class="bg-music-time">
+        <span data="current">00:00</span> / <span data="length">00:00</span>
+      </div>
+      <div class="bg-music-progress">
+        <div class="bg-music-progress-slider" style="width:0%;"></div>
+      </div>
+      <div class="bg-music-buttons">
+        <div id="bg-music-play-mode-button" mode="loop">
+          <i class="<%- theme.iconfont.class_map.loop %>"></i>
+          <i class="<%- theme.iconfont.class_map.loopOne %>"></i>
+          <i class="<%- theme.iconfont.class_map.random %>"></i>
+        </div>
+        <div id="bg-music-previous-button">
+          <i class="<%- theme.iconfont.class_map.musicPrev %>"></i>
+        </div>
+        <div id="bg-music-play-pause-button">
+          <i class="<%- theme.iconfont.class_map.play %>"></i>
+          <i class="<%- theme.iconfont.class_map.pause %>"></i>
+        </div>
+        <div id="bg-music-next-button">
+          <i class="<%- theme.iconfont.class_map.musicNext %>"></i>
+        </div>
+        <div id="bg-music-playlist-button">
+          <i class="<%- theme.iconfont.class_map.playlist %>"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-music-info">
+    <div class="bg-music-lyric-container">
+      <div class="bg-music-lyric">
+        <%# <p>TEMPLATE</p> %>
+      </div>
+    </div>
+  </div>
+  <div class="bg-music-playlist">
+    <div class="bg-music-playlist-mask"></div>
+    <div class="bg-music-playlist-container">
+      <div class="bg-music-playlist-title">播放列表</div>
+      <div class="bg-music-playlist-item-container">
+        <ul>
+          <%#
+            <li>
+              <i class="iconfont icon-music-playing"></i>
+              <div>TEMPLATE</div>
+              <div>TEMPLATE</div>
+            </li>
+          %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

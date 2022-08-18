@@ -1,0 +1,76 @@
+<nav class="navbar">
+  <div class="navbar-items">
+    <a class="sidebar-toggler">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </a>
+
+    <div class="site-branding">
+      <div class="site-title">
+        <a href="/"><%- config.title %></a>
+      </div>
+    </div>
+
+    <div class="navbar-menus">
+      <ul class="pc-only-menu">
+        <% for(const each of theme.navbar.menu || []) { %>
+          <% if (!each.submenu && !each.link) continue %>
+
+          <% var text = each.name || __(each.key + '.title') %>
+          <% if (text.indexOf('.title') !== -1) { text = each.key } %>
+
+          <li>
+            <a href="<%= each.link ? url_for(each.link) : "javascript:void(0)" %>">
+              <%- each.icon ? '<i class="' + each.icon + '"></i>' : '' %>
+              <%- text %>
+            </a>
+
+            <% if (each.submenu) { %>
+              <ul class="sub-menu">
+                <% for(const subEach of each.submenu) { %>
+                  <% if (!subEach.link) continue %>
+
+                  <% var subText = subEach.name || __(subEach.key + '.title') %>
+                  <% if (subText.indexOf('.title') !== -1) { subText = subEach.key } %>
+
+                  <li>
+                    <a href="<%= url_for(subEach.link) %>">
+                      <%- subEach.icon ? '<i class="' + subEach.icon + '"></i>' : '' %>
+                      <%- subText %>
+                    </a>
+                  </li>
+                <% } %>
+              </ul>
+            <% } %>
+          </li>
+        <% } %>
+      </ul>
+
+      <ul class="tool-menu">
+        <li id="bg-music-btn">
+          <a href="javascript:void(0)">
+            <i class="<%- theme.iconfont.class_map.musicForbidden %>"></i>
+            <i class="<%- theme.iconfont.class_map.music %>"></i>
+          </a>
+        </li>
+
+        <li id="color-scheme-btn">
+          <a href="javascript:void(0)">
+            <i class="<%- theme.iconfont.class_map.moon %>"></i>
+            <i class="<%- theme.iconfont.class_map.sun %>"></i>
+          </a>
+        </li>
+
+        <li id="search-btn">
+          <a href="javascript:void(0)">
+            <i class="<%- theme.iconfont.class_map.search %>"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 到顶部按钮 -->
+  <!-- <div class="cd-top-box">
+    <a href="#" class="cd-top"></a>
+  </div> -->
+</nav>

@@ -1,0 +1,81 @@
+// Inherit box-sizing to make it easier to change the property for components that leverage other behavior
+// see http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+*, *:before, *:after
+  box-sizing inherit
+
+
+::selection
+  background #A0DAD0
+  color #fff
+
+
+html
+  height 100%
+  box-sizing border-box
+  font-family sans-serif
+  overflow-wrap break-word
+  -webkit-text-size-adjust 100%
+  -ms-text-size-adjust 100%
+
+
+body
+  margin 0
+  height 100%
+  font-size $font-size
+  font-family $font-family
+  letter-spacing $letter-spacing
+  font-weight 400
+  line-height 1.5
+  text-align left
+  overflow-wrap break-word
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  color var(--text-color)
+  background var(--main-bg-color)
+
+
+a
+  text-decoration none
+  outline none
+
+
+hr
+  border 0
+  height 1px
+  margin-bottom 1.5em
+  background-color var(--separator-line-color)
+  box-sizing content-box
+
+
+
+.site-content
+  flex 0 0 60%
+  max-width 60%
+  padding 60px 10px 40px 10px
+
+  +mobile-device()
+    padding-left 4%
+    padding-right 4%
+    flex 0 0 100%
+    max-width 100%
+
+#page
+  display flex
+  flex-direction row
+  align-items stretch
+  justify-content center
+
+  .page-aside
+    display block
+    padding 1rem
+    margin 0
+    flex 0 0 20%
+    max-width 20%
+
+    +mobile-device()
+      flex none
+      padding 0
+      max-width unset
+
+      &:not(.sidebar)
+        display none

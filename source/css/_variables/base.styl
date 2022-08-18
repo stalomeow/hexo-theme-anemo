@@ -1,0 +1,78 @@
+:root
+  // 引入亮色模式的 css 变量
+  for key, value in $css-light-vars
+    {key} unquote(value)
+
+  +dark-mode()
+    // 引入暗色模式的 css 变量
+    for key, value in $css-dark-vars
+      {key} unquote(value)
+
+
+
+// font
+$font-size = theme-config("font.font_size", "16px")
+$letter-spacing = theme-config("font.letter_spacing", "0.02em")
+$font-family = theme-config("font.font_family", '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"')
+$code-font-size = theme-config("font.code_font_size", "85%")
+
+// banner
+$banner-width-height-ratio = theme-config-origin("banner.width_height_ratio", 1)
+$banner-dyanmic-loop-img-count = theme-config-origin("banner.dynamic_loop.img_count", 6)
+$banner-dyanmic-loop-each-seconds = theme-config-origin("banner.dynamic_loop.each_seconds", 6)
+
+// scroll arrow
+$scroll-down-tip-height-limit = theme-config-origin("scroll_down_tip.banner_height_limit", 80)
+
+
+// loading box
+$loading-box-z-index = 2000
+$sidebar-z-index = 1500
+
+
++dark-mode()
+  .brick a
+    background: var(--main-info-color)
+    color: var(--main-text-color)
+
+  .arrow-left-ar
+    border-bottom: 20px solid var(--main-info-color)
+
+  #archives-temp h2
+    color: var(--main-text-color)
+    border-bottom: 1px dashed var(--br-color)
+
+  #archives-content
+    border-left: 1px dashed var(--br-color)
+
+  .comment .commeta, #comments-navi
+    border-bottom: 1px dashed var(--br-color)
+
+  .info-meta span a, .info-meta span
+    color: #676767
+
+  .site-footer
+    border-top: 1px solid var(--br-color)
+
+  .breadcrumbs, .comment .info
+    color: #676767
+
+  .entry-header hr
+    background: var(--img-br)
+
+
+
+
+
+
+// #ff6d6d
+// #E67474
+// #545454
+// #7C9AAF
+// #737373
+// #6d6c6c
+// #F9F9F9
+// #C4E2EA
+// #FFF6B5
+// #545454
+// #C8E6FB

@@ -1,0 +1,34 @@
+<% if (theme.share.wechat.enable || theme.share.qzone.enable || theme.share.sina.enable) { %>
+  <div class="post-share">
+    <ul class="sharehidden">
+      <% if (theme.share.wechat.enable) { %>
+        <li>
+          <a href="https://api.pwmqr.com/qrcode/create/?url=<%- page.permalink %>"
+            onclick="window.open(this.href, 'weixin-share', 'width=490,height=700');return false;"
+            class="s-weixin">
+            <img src="<%- theme.share.wechat.icon %>">
+          </a>
+        </li>
+      <% } %>
+      <% if (theme.share.qzone.enable) { %>
+        <li>
+          <a href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<%- page.permalink %>&title=<%- page.title || config.title %>"
+            onclick="window.open(this.href, 'qq-share', 'width=730,height=500');return false;"
+            class="s-qq">
+            <img src="<%- theme.share.qzone.icon %>">
+          </a>
+        </li>
+      <% } %>
+      <% if (theme.share.sina.enable) { %>
+        <li>
+          <a href="http://service.weibo.com/share/share.php?url=<%- page.permalink %>&title=<%- page.title || config.title %>"
+            onclick="window.open(this.href, 'weibo-share', 'width=550,height=235');return false;"
+            class="s-sina">
+            <img src="<%- theme.share.sina.icon %>">
+          </a>
+        </li>
+      <% } %>
+    </ul>
+    <i class="<%- theme.iconfont.class_map.share %> show-share"></i>
+  </div>
+<% } %>

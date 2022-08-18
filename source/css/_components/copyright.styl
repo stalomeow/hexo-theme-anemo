@@ -1,0 +1,33 @@
+.license-icon i
+  font-size 1.25rem
+
+.open-message
+  margin 50px 0
+  position relative
+  background var(--color-canvas-subtle)
+  padding 10px 30px
+  border-radius 5px
+  font-size 14px
+  color var(--color-fg-default)
+
+  &::after
+    content ""
+    border-left 10px solid transparent
+    border-right 10px solid transparent
+    border-bottom 10px solid var(--color-canvas-subtle)
+    position absolute
+    top -8px
+    left 48%
+
+  p
+    margin 5px 0
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+
+  a
+    color var(--color-accent-fg)
+    padding 0 5px
+
+    &:hover
+      color var(--color-accent-emphasis)
