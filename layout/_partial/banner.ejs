@@ -53,17 +53,13 @@ if (typeof banner_img === 'string') {
 } else {
   banner_type = null;
 }
-
-var banner_parallax = theme.banner && theme.banner.parallax && 'parallax=true'
-
-// 别用 vh，iOS Safari 下很丑
-// 详见 https://blog.csdn.net/qq_40138556/article/details/122337874?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1.pc_relevant_paycolumn_v3&utm_relevant_index=2
-var banner_img_height_style = `style="height:${banner_img_height}vh;"`
 %>
 
 <% if (banner_type) { %> <%# 有 banner 的时候才生成 %>
-  <header class="banner pjax" <%- banner_parallax %> <%- banner_img_height_style %>>
-    <% if (banner_type === 'multi') { %> <%# 多图片切换 %>
+  <header class="banner pjax" <%- `banner-height="${banner_img_height}"` %>>
+    <% if (is_home() && theme.index.special_banner.enable) { %>
+      <%# placeholder %>
+    <% } else if (banner_type === 'multi') { %> <%# 多图片切换 %>
 
       <div class="banner-images">
         <% for(let i = 0; i < theme.banner.dynamic_loop.img_count; i++) { %>

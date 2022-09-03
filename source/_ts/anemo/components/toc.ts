@@ -204,7 +204,7 @@ const component_toc: IComponent = {
     // handle click events
     tocLinks.forEach(link => link.addEventListener('click', e => {
       e.preventDefault();
-      anemoUtils.scrollToElement($.assert(link.attr('href')!));
+      anemoUtils.scrollTo($.assert<HTMLElement>(link.attr('href')!));
     }));
 
     let activeIndex = -1;

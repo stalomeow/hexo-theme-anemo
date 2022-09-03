@@ -12,7 +12,7 @@ const component_scrollDownTip: IComponent = {
   refresh: function () {
     $('.scroll-down-tip')?.addEventListener('click', function () {
       const main = $<HTMLElement>('#page');
-      main && anemoUtils.scrollToElement(main); // 滚动到 main
+      main && anemoUtils.scrollTo(main); // 滚动到 main
     });
   }
 };

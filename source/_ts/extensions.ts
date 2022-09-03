@@ -1,24 +1,4 @@
 Object.assign(Element.prototype, {
-  // height: function (h) {
-  //   if (h) {
-  //     this.style.height = typeof h === 'number' ? h + 'rem' : h;
-  //   }
-  //   return this.getBoundingClientRect().height
-  // },
-  // width: function (w) {
-  //   if (w) {
-  //     this.style.width = typeof w === 'number' ? w + 'rem' : w;
-  //   }
-  //   return this.getBoundingClientRect().width
-  // },
-  // insertAfter: function (element) {
-  //   const parent = this.parentNode;
-  //   if (parent.lastChild == this) {
-  //     parent.appendChild(element);
-  //   } else {
-  //     parent.insertBefore(element, this.nextSibling);
-  //   }
-  // },
   attr: function (qualifiedName: string, value?: string | null): string | null | Element {
     const e = this as unknown as Element;
 

@@ -1,23 +1,28 @@
 export default {
+  timingFunctions: {
+    linear(t: number, a: number, b: number): number {
+      return a + t * (b - a);
+    },
+
+    easeIn(t: number, a: number, b: number): number {
+      return a + t * t * (b - a);
+    },
+
+    easeOut(t: number, a: number, b: number): number {
+      return a + (2 * t - t * t) * (b - a);
+    }
+  },
+
   randomInt(minInclusive: number, maxExclusive: number): number {
     return Math.floor((Math.random() * maxExclusive) + minInclusive);
   },
 
-  /**
-   * 线性插值
-   * @param a 起始值
-   * @param b 终止值
-   * @param t 插值参数
-   * @returns 插值结果
-   */
-  lerp(a: number, b: number, t: number): number {
-    return a + t * (b - a);
-  },
-
-  scrollToElement(element: HTMLElement): void {
+  scrollTo(elementOrTop: HTMLElement | number, animate = true): void {
+    const argIsNumber = typeof elementOrTop === 'number';
+    const top = argIsNumber ? elementOrTop : elementOrTop.top();
     window.scrollTo({
-      top: element.top(),
-      behavior: 'smooth'
+      top: top,
+      behavior: animate ? 'smooth' : undefined
     });
   },
 

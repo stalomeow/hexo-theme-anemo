@@ -1,6 +1,8 @@
+import component_bannerBeautifier from './components/bannerBeautifier';
 import component_bgMusic from './components/bgMusic';
 import component_comment_twikoo from './components/comments/twikoo';
 import component_fancybox from './components/fancybox';
+import component_genshinBanner from './components/genshinBanner';
 import component_localSearch from './components/localSearch';
 import component_markdownBeautifier from './components/markdownBeautifier';
 import component_mermaid from './components/mermaid';
@@ -27,5 +29,8 @@ export default [
   component_fancybox,
   component_mermaid,
 
-  component_comment_twikoo
+  component_comment_twikoo,
+
+  component_bannerBeautifier,
+  component_genshinBanner
 ] as const;

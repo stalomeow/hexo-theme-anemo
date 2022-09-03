@@ -1,7 +1,8 @@
 <%# Argument: assets(object) %>
 
 <%
-if (theme.fancybox.enable && page.fancybox === true) {
+// 尽量每页都有 fancybox，除非特别在 frontmatter 里指定了 false
+if (theme.fancybox.enable && page.fancybox !== false) {
   assets.fancybox = [
     url_join(theme.static_prefix.fancybox, 'fancybox.css'),
     url_join(theme.static_prefix.fancybox, 'fancybox.umd.js')

@@ -69,6 +69,65 @@ loading_box:
   close_tip: 点击任意处关闭
 
 
+# 压缩文件大小
+#
+minify:
+  # 压缩 HTML
+  #
+  html:
+    enable: true
+    options:
+      removeAttributeQuotes: false
+      collapseBooleanAttributes: true
+      collapseWhitespace: true
+      ignoreCustomComments:
+        - ^\s*more # Ignore '<!-- more -->' https://hexo.io/docs/tag-plugins#Post-Excerpt
+      removeComments: true
+      removeEmptyAttributes: true
+      removeScriptTypeAttributes: true
+      removeStyleLinkTypeAttributes: true
+      minifyJS: true
+      minifyCSS: true
+
+  # 压缩 JS
+  #
+  js:
+    enable: true
+    options:
+
+  # 压缩 CSS
+  #
+  css:
+    enable: true
+    options:
+
+  # 压缩本地字体
+  #
+  local_fonts:
+    enable: true
+    # 全局保留的字符
+    #
+    preserved_chars: 1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+    # 字体列表
+    #
+    includes:
+        # 字体文件路径
+        #
+      # - path: _font/GenshinImpact.ttf
+      #   # 字体文件导出路径
+      #   #
+      #   export_path: font/GenshinImpact.ttf
+      #   # 需要保留的字符
+      #   #
+      #   preserved_chars:
+      #     # HTML 中的字符
+      #     #
+      #     html: true
+      #     # 额外保留的字符
+      #     #
+      #     custom: ★ω祝觑哇迎握手党棒浪厉害拿青佬坛旅途愉快昵称星穹铁道
+
+
 iconfont:
   links:
     - //at.alicdn.com/t/c/font_3495329_rsmj9wo3izg.css # 主题内置图标库
@@ -153,14 +212,14 @@ css_vars:
     --scrollbar-thumb-hover-color: "#35B995"
     --main-bg-color: "#171717"
 
-    --main-text-color: "#E5E5E5" # remove
+    --main-text-color: "rgba(255, 255, 255, 0.7)" # remove
     --main-text2-color: "#afafaf" # remove
     --main-info-color: "#202020"  # remove
 
     --msg-box-bg-color: "#202020"
     --msg-box-text-color: "#E5E5E5"
 
-    --text-color: "#E5E5E5" # #aaa
+    --text-color: "rgba(255, 255, 255, 0.7)" # #aaa
     --text-sec-color: "#afafaf"
 
     --link-color: "#E67474"
@@ -175,7 +234,7 @@ css_vars:
     --img-br: "#303030" # remove
     --br-color: "#2c2c2c" # remove
 
-    --color-fg-default: "#c9d1d9"
+    --color-fg-default: "rgba(255, 255, 255, 0.7)"
     --color-fg-muted: "#8b949e"
     --color-fg-subtle: "#484f58"
     --color-canvas-default: "#171717"
@@ -290,7 +349,6 @@ navbar:
         ]
       }
     - { key: "links", link: "/links/", icon: 'iconfont icon-link' }
-    - { key: "追番", link: "/bangumis/", icon: 'iconfont icon-tv' }
     - { key: "感谢", link: "/thanks/", icon: 'iconfont icon-love' }
     - { key: "开往", link: "https://travellings.link", icon: 'iconfont icon-subway' }
     - { key: "about", link: "/about/", icon: 'iconfont icon-user' }
@@ -378,6 +436,9 @@ index:
     enable: true
     text: 开发中画面，不代表最终品质 #TECH OTAKUS SAVE THE WORLD
 
+  special_banner:
+    enable: true
+
   # 可行的参数
   # 1. 给一个 url                            -> single   pic banner
   # 2. 给一个 url[]                          -> multiple pic banner
@@ -385,7 +446,7 @@ index:
   # 3. 给一个 { pic, size?, pos? }[]         -> multiple pic banner
   # 5. 给一个 { video, poster?, fit?, pos? } -> video        banner
   banner_img:
-    video: /images/hutao.mp4
+    video: https://gcore.jsdelivr.net/gh/Jin-Yuhan/WebAssetStorage@latest/videos/hutao.mp4
     poster: /images/poster.jpg
     fit: cover
     pos: 70% 50%
@@ -394,7 +455,7 @@ index:
 
   banner_mask_alpha: 0.4
 
-  notice: 莫等闲、白了少年头，空悲切。
+  notice: 先别急，主题还在开发中。
 
   auto_excerpt:
     enable: true
@@ -418,7 +479,7 @@ post:
 
 footer:
   content: >-
-    Framework <a href="https://hexo.io" target="_blank" rel="nofollow noopener">Hexo</a> | Theme <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">Anemo</a>
+    Framework <a href="https://hexo.io" target="_blank" rel="nofollow noopener">Hexo</a> | Theme <a href="https://github.com/Jin-Yuhan/hexo-theme-anemo" target="_blank" rel="nofollow noopener">Anemo</a>
     <br>
     ©2020-2022 Stalo. All rights reserved.
 
@@ -432,7 +493,7 @@ page:
 
 tag:
   enable: true
-  banner_img:
+  banner_img: 
   banner_img_height: 100
   banner_mask_alpha: 0.4
   title: 标签云
@@ -562,6 +623,16 @@ links:
       link: "https://qingshaner.com"
       avatar: "https://qingshaner.oss-cn-hangzhou.aliyuncs.com/images/202205021359396.jpg"
 
+    - title: 小罗的小窝
+      intro: 爱好很广的萌新程序员
+      link: https://xiao-luo17.github.io/
+      avatar: https://xiao-luo17.github.io/img/avatar.jpg
+
+    - title: 闪闪の小窝
+      intro: 来玩！玩累了…就睡觉！没问题的！
+      link: https://moechun.fun/
+      avatar: https://img.moechun.fun/avatar/hanajiang-2.png
+
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
   onerror_avatar: /img/avatar.png
@@ -665,8 +736,9 @@ export_config:
   # - web_analytics
   # - sidebar:
   #   - toc
-  # - index:
-  #   - slogan
+  - index:
+    - slogan
+    - special_banner
   - fancybox
   - mermaid:
     - enable
@@ -725,5 +797,9 @@ static_prefix:
   disqusjs: https://cdn.jsdelivr.net/npm/disqusjs@1/dist/
 
   twikoo: https://cdn.jsdelivr.net/npm/twikoo@1/dist/
+
+  spine: https://unpkg.com/@esotericsoftware/spine-threejs@4.0.*/dist/iife/
+
+  threejs: https://unpkg.com/three@0.141.0/build/
 
   hint: /lib/hint/

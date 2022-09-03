@@ -1,4 +1,5 @@
 import './extensions'; // 拓展模块
+import anemoUtils from './anemo/utils/anemoUtils';
 import assetManager from './anemo/managers/assetManager';
 import colorSchemeManager from './anemo/managers/colorSchemeManager';
 import componentManager from './anemo/managers/componentManager';
@@ -10,12 +11,14 @@ import requiredComponents from './anemo/requiredComponents';
 
 async function refreshPageAsync(): Promise<void> {
   loadingBox.display(0.7, 'loading assets...');
-  await assetManager.loadPageAssetsAsync();
+  const assets = Object.values(configManager.pageAssetConfig).flat();
+  await assetManager.loadAssetsAsync(assets);
 
   loadingBox.display(0.94, 'refreshing...'); // 卡半岩
   await componentManager.refreshAllComponentsAsync();
 
   loadingBox.display(1, 'success');
+  anemoUtils.scrollTo(0, false); // reset pos
 }
 
 
@@ -39,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       loadingBox.display(0.45, 'changing page...');
       componentManager.cleanupAllComponents();
     },
-    /* pjaxSuccessCallback */ () => {
+    /* pjaxSuccessCallback */() => {
       refreshPageAsync();
     }
   );

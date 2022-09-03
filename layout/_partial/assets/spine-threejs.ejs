@@ -1,0 +1,10 @@
+<%# Argument: assets(object) %>
+
+<%
+if (is_home() && theme.index.special_banner.enable) {
+  assets.spine_threejs = [
+    url_join(theme.static_prefix.threejs, 'three.js'),
+    url_join(theme.static_prefix.spine, 'spine-threejs.js')
+  ];
+}
+%>

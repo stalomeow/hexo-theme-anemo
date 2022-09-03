@@ -8,8 +8,8 @@ export default {
     return configObj;
   },
 
-  get pageConfig(): Record<string, any> {
-    return {};
+  get pageAssetConfig(): Record<string, any> {
+    return (window as any)['PAGE_ASSETS'];
   },
 
   async initializeAsync(): Promise<void> {

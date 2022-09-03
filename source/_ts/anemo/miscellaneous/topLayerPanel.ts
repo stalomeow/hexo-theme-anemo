@@ -28,18 +28,12 @@ export default class TopLayerPanel {
     this.setState();
 
     this._openButton.addEventListener('click', () => {
-      if (events?.beforeOpen) {
-        events.beforeOpen();
-      }
-
+      events?.beforeOpen?.();
       this.openAsync().then(events?.afterOpen);
     });
 
     this._closeButton.addEventListener('click', () => {
-      if (events?.beforeClose) {
-        events.beforeClose();
-      }
-
+      events?.beforeClose?.();
       this.closeAsync().then(events?.afterClose);
     });
   }

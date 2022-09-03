@@ -7,7 +7,7 @@ import debugUtils from '../utils/debugUtils';
 const markdownBodySelector = '.markdown-body';
 
 function beautifyH1H2(md: HTMLElement) {
-  $.all('h1, h2', md).forEach(heading => {
+  $.each('h1, h2', heading => {
     const span = $.create('span');
 
     // 把标题内容用 span 包裹起来
@@ -19,11 +19,11 @@ function beautifyH1H2(md: HTMLElement) {
     });
 
     heading.appendChild(span);
-  });
+  }, md);
 }
 
 function beautifyTabs(md: HTMLElement) {
-  $.all<HTMLElement>('div.tab', md).forEach(tab => {
+  $.each<HTMLElement>('div.tab', tab => {
     const tabId = tab.attr('tab-id');
     const tabName = tab.attr('tab-name');
 
@@ -66,7 +66,7 @@ function beautifyTabs(md: HTMLElement) {
       $.assert(`.tab[tab-name="${tabName}"]`, box!).attr('active', '');
       li.attr('active', '');
     });
-  });
+  }, md);
 }
 
 function beautifyCodeblocks(md: HTMLElement) {
@@ -103,7 +103,7 @@ function beautifyCodeblocks(md: HTMLElement) {
   }
 
   function codeblockTools(copyButton: boolean): void {
-    $.all<HTMLElement>('pre', md).forEach(pre => {
+    $.each<HTMLElement>('pre', pre => {
       const bgClass = getToolsBgClass(pre);
 
       let caption: HTMLElement | null;
@@ -133,7 +133,7 @@ function beautifyCodeblocks(md: HTMLElement) {
       wrapper.insertAdjacentHTML('beforeend', html);
 
       caption?.remove();
-    });
+    }, md);
   }
 
   function switchCodeblockFoldState(table: HTMLElement, button: HTMLElement, maxHeight: number, open?: boolean): void {
@@ -182,7 +182,7 @@ function beautifyCodeblocks(md: HTMLElement) {
     // });
 
     // prismjs
-    $.all<HTMLElement>('pre[class*=language-]', md).forEach(pre => {
+    $.each<HTMLElement>('pre[class*=language-]', pre => {
       if (pre.clientHeight <= maxHeight) {
         return;
       }
@@ -200,7 +200,7 @@ function beautifyCodeblocks(md: HTMLElement) {
       pre.parentElement!.appendChild(button);
 
       switchCodeblockFoldState(pre, button, maxHeight, false);
-    });
+    }, md);
   }
 
   const copyButton = true; // this.enableCopyButton;

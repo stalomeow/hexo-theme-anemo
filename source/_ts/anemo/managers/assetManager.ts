@@ -12,8 +12,8 @@ function loadJS(url: string): Promise<void> {
   });
   script.async = false;
 
-  const e = $('script') || document.head;
-  e.parentElement!.insertBefore(script, e);
+  // 这里和 css 的统一一下。
+  document.body.insertAdjacentElement('beforeend', script);
 
   return new Promise(resolve => {
     script.addEventListener('load', () => resolve());
@@ -27,8 +27,11 @@ function loadCSS(url: string): Promise<void> {
     'href': url
   });
 
-  const e = $('link') || document.head;
-  e.parentElement!.insertBefore(link, e);
+  // 直接插在最后面，覆盖掉以前加载的 css 里的样式。
+  // 至少要放在 main.css 后面。
+  // 之前不小心把这些 css 放 main.css 前面，
+  // 导致代码块颜色被 main.css 里的样式给覆盖了。
+  document.body.insertAdjacentElement('beforeend', link);
 
   return new Promise(resolve => {
     link.addEventListener('load', () => resolve());
@@ -58,8 +61,7 @@ export default {
     loadedAssets.add(url);
   },
 
-  loadPageAssetsAsync(): Promise<unknown> {
-    const assets = Object.values(window.PAGE_ASSETS).flat();
+  loadAssetsAsync(assets: string[]): Promise<unknown> {
     const promises: Promise<void>[] = [];
 
     for (const url of assets) {

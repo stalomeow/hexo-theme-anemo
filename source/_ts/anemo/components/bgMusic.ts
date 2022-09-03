@@ -728,7 +728,7 @@ class MusicPlayer {
     return this._playlist.playIndex;
   }
 
-  public playCurrentMusic(time = 0): void {
+  public playCurrentMusic(time?: number): void {
     if (!this._audio.paused) {
       debugUtils.warning('can not play music because music has been being played');
       return;
@@ -746,7 +746,11 @@ class MusicPlayer {
 
     this._panel.panelElement.attr('playing', '');
     this._panel.openBtnElement.attr('playing', '');
-    this._audio.play().then(() => this._audio.currentTime = time);
+    this._audio.play().then(() => {
+      if (typeof time === 'number') {
+        this._audio.currentTime = time;
+      }
+    });
   }
 
   public pauseCurrentMusic(): void {
@@ -773,7 +777,7 @@ class MusicPlayer {
 
     if (this._playModeController.playMode === 'loop-one') {
       this._audio.currentTime = 0;
-      this.playCurrentMusic();
+      this.playCurrentMusic(0);
     } else {
       this._playlist.switchToNextMusic(
         direction,

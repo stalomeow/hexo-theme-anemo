@@ -74,7 +74,7 @@ const component_fancybox: IComponent = {
     // as well as to all **future** matching elements.
     window.Fancybox.bind('[data-fancybox]', configManager.siteConfig.fancybox.options || {});
 
-    const images = $.all<HTMLImageElement>('.entry-content img:not([nofancybox])');
+    const images = $.all<HTMLImageElement>('.markdown-body img:not([nofancybox])');
     registerImages(images);
   }
 };

@@ -15,7 +15,7 @@ const elementsColors = [
   [0, 192, 255], // 水
   [51, 215, 160], // 风
   [204, 128, 255], // 雷
-  [170, 255, 41], // 草（这个颜色我不确定）
+  [155, 229, 61], // 草
   [122, 242, 242], // 冰
   [255, 176, 13] // 岩
 ];
@@ -59,7 +59,7 @@ function updateView(time: DOMHighResTimeStamp): void {
   if (lastUpdateTime) {
     const deltaTime = (time - lastUpdateTime) * 0.001; // to unit: sec
     const t = Math.min(deltaTime * 10, 0.5);
-    displayProgress = anemoUtils.lerp(displayProgress, targetProgress, t);
+    displayProgress = anemoUtils.timingFunctions.linear(t, displayProgress, targetProgress);
   } else {
     // 从零开始，如果直接设成 _targetProgress 的话，
     // 有时候速度太快看不见加载页面

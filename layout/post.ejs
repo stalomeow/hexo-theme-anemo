@@ -23,31 +23,17 @@
     <%- page.content %>
   </div>
 
-  <!-- 文章底部 -->
-  <footer class="post-footer">
-    <!-- 文章标签 -->
-    <div class="post-tags">
-      <i class="<%- theme.iconfont.class_map.tags %>"></i>
-      <% page.tags.each(function(tag, i) { %>
-        <a href="<%= url_for(tag.path) %>"><span>#</span><%- tag.name %></a>
-      <% }) %>
-    </div>
+  <!-- 版权声明 -->
+  <%- partial('_partial/copyright') %>
 
-    <!-- 阅读次数 -->
-    <div class="post-like">
-      <a href="javascript:;" data-action="ding" data-id="58" class="specsZan ">
-        <i class="<%- theme.iconfont.class_map.view %>"></i>
-        <span class="count">13w</span>
-      </a>
-    </div>
-
-    <!-- 分享按钮 -->
-    <%- partial('_partial/share') %>
-  </footer>
+  <!-- 文章标签 -->
+  <div class="post-tags">
+    <i class="<%- theme.iconfont.class_map.tags %>"></i>
+    <% page.tags.each(function(tag, i) { %>
+      <a href="<%= url_for(tag.path) %>"><span>#</span><%- tag.name %></a>
+    <% }) %>
+  </div>
 </article>
-
-<!-- 版权声明 -->
-<%- partial('_partial/copyright') %>
 
 <!-- 相邻文章 -->
 <%- partial('_partial/post-prev-next') %>

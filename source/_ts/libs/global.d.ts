@@ -30,5 +30,5 @@ declare interface Window {
   twikoo: any;
   Fancybox: any;
   mermaid: any;
-  PAGE_ASSETS: Record<string, string[]>
+  // PAGE_ASSETS: Record<string, string[]>;
 }

@@ -261,35 +261,3 @@
 
       &:hover
         color var(--text-color)
-
-  &-more-info // 光标悬停在文章上时，左侧出现的文章数据
-    display flex
-    flex-direction column
-    position absolute
-    top 50%
-    padding-top 0.5rem
-    border-top 0.0625rem solid var(--text-sec-color)
-    transition 0.6s all ease-in-out
-    transform translate3d(0, -70%, 0)
-    visibility hidden
-    opacity 0
-
-    +mobile-device()
-      display none
-
-    .index-post:hover & // 光标悬停在文章上时显示更多文章数据
-      transform translate3d(calc(-100% - 1rem), -70%, 0)
-      visibility visible
-      opacity 1
-
-    span
-      color var(--text-sec-color)
-      font-size 0.8125rem
-
-    i
-      margin-top 0.1875rem
-      margin-right 0.625rem
-      float left
-
-    a
-      color var(--text-sec-color)
